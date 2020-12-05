@@ -1,0 +1,19 @@
+{
+  "name": "facbook-scraper-backend",
+  "version": "1.0.0",
+  "description": "a tool that can be used for scraping Facebook without the use of api",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jemxz/facebook-scraper-nodejs.git"
+  },
+  "author": "Jemail Omer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jemxz/facebook-scraper-nodejs/issues"
+  },
+  "homepage": "https://github.com/jemxz/facebook-scraper-nodejs#readme"
+}
