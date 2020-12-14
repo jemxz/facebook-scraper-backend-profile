@@ -8,12 +8,20 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jemxz/facebook-scraper-nodejs.git"
+    "url": "git+https://github.com/jemxz/Facebook-scraper-nodejs.git"
   },
   "author": "Jemail Omer",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/jemxz/facebook-scraper-nodejs/issues"
+    "url": "https://github.com/jemxz/Facebook-scraper-nodejs/issues"
   },
-  "homepage": "https://github.com/jemxz/facebook-scraper-nodejs#readme"
+  "homepage": "https://github.com/jemxz/Facebook-scraper-nodejs#readme",
+  "dependencies": {
+    "cron": "^1.8.2",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.2",
+    "pug": "^3.0.0",
+    "puppeteer": "^2.1.1",
+    "puppeteer-core": "^2.0.0"
+  }
 }
