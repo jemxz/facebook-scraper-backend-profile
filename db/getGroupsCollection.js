@@ -7,14 +7,9 @@ mongoose.connect('mongodb://localhost/facebook-data', {useNewUrlParser:true, use
 
 
 async function getGroupsCollection() {
-    const id = "5fd0f98751e33831d8ef489a"
-    const groupsCollection = await GroupsCollection.findOne({"groups._id":id}, {"groups._id.$":true})
-    const posts = groupsCollection.groups[0].posts
-
-                
-       
-
-    console.log(groupsCollection);
+    const id = "Bisrate Gebriel International School - BGIS"
+    const groupsCollection = await GroupsCollection.findOne({"groups.name":id}, {"groups.name.$":true})
+    return groupsCollection
 }
 
 getGroupsCollection()
