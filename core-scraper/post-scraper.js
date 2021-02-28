@@ -203,7 +203,7 @@ module.exports = async function createPosts(page, postIds){
         //  console.log(comments);
             posts.push ({
                     postId: postLinks[i],
-                    postContent:postContent,
+                    postContent: postContent,
                     numberOfLikes: like,
                     numberOfShares: share,
                     timeOfPost: timeStamp,

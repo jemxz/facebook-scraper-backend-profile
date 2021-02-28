@@ -1,12 +1,13 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-const groupsCollection = new Schema({
-        groups: [
+const usersCollection = new Schema({
+        users: [
             {
                 name: String,
-                numberOfFollowers: String,
+                numberOfFriends: String,
                 about: String,
+                info: Array,
                 facebookLink: String,
                 posts: [
                     {
@@ -29,5 +30,5 @@ const groupsCollection = new Schema({
         date: String
 })
 
-const GroupsCollection = mongoose.model('GroupsCollection', groupsCollection)
-module.exports = GroupsCollection
+const UsersCollection = mongoose.model('UsersCollection', usersCollection)
+module.exports = UsersCollection

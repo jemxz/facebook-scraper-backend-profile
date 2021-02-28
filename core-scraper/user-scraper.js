@@ -1,16 +1,16 @@
 const scrollToBottom = require('../middlewares/auto-scroll');
-const createGroup = require('./post-scraper')
+const createUser = require('./post-scraper')
+const getAbout = require('./about-scraper')
 
 const target = [
-    "https://m.facebook.com/BGISaddis",
-    "https://m.facebook.com/BGISaddis"    
+    "https://m.facebook.com/profile.php?id=100022599533892",    
 ]
 
 
 
-module.exports = async function createGroups(page){
+module.exports = async function createUsers(browser, page){
 
-        const groups = []
+        const users = []
 
         for (let i = 0; i < target.length; i++) {
 
@@ -20,6 +20,14 @@ module.exports = async function createGroups(page){
                     await page.goto(target[i]);
                     await page.waitFor(1000)
                     console.log("navigation succesfull");
+
+                } catch(error){
+                    console.log(error.message);
+                }
+
+            const info = await getAbout(page)
+
+            try{
                     await scrollToBottom(page)
                     console.log("scrolling success");
                 } catch (error) {
@@ -50,9 +58,9 @@ module.exports = async function createGroups(page){
                     return console.log(error.message)
                 } 
                 
-            // Scraping the numberOfFollowers of a given page  // 
+            // Scraping the numberOfFriends of a given page  // 
             try {
-                let selector = "._59k";            
+                let selector = "._7-1j";            
                 var numberOfFollowers = await page.evaluate((sel) => {
                             let elements = []
                             elements= Array.from(document.querySelectorAll(sel))
@@ -69,7 +77,7 @@ module.exports = async function createGroups(page){
             
             // Scraping the about Section of a given page //
             try {
-                let selector = "._59k";            
+                let selector = "._7i5d";            
                 var about = await page.evaluate((sel) => {
                             let elements = []
                             elements= Array.from(document.querySelectorAll(sel))
@@ -84,9 +92,9 @@ module.exports = async function createGroups(page){
                     return console.log(error.message)
                 }
                 
-            // Scraping the name of a given page //
+            // Scraping the name of a given user //
             try {
-                let selector = "._59k";            
+                let selector = "._6x2x";            
                 var nameOfGroup = await page.evaluate((sel) => {
                             let elements = []
                             elements= Array.from(document.querySelectorAll(sel))
@@ -106,25 +114,26 @@ module.exports = async function createGroups(page){
             const arr = postIds.filter(postId => postId !== "empty")
             
             
-            const posts = await createGroup(page, arr)
+            const posts = await createUser(page, arr)
             
         
-            groups.push({
+            users.push({
                 name: nameOfGroup,
-                numberOfFollowers: numberOfFollowers,
+                numberOfFriends: numberOfFollowers,
                 about: about,
+                info: info,
                 facebookLink: target[i],
                 posts: posts
             })
             
             
         }
-    
-    return groups
+    console.log(users);
+    return users
  
         
 }
 
 
-// getGroups()
+// createUsers()
 // module.exports = getPosts

@@ -1,7 +1,7 @@
 const puppeteer = require('puppeteer');
 const login = require('./middlewares/login')
-const createGroups = require('./core-scraper/group-scraper')
-const GroupsCollection = require('./Model/groupsCollection-model')
+const createUsers = require('./core-scraper/user-scraper')
+const GroupsCollection = require('./model/usersCollection-model')
 const mongoose = require('mongoose');
 var CronJob = require('cron').CronJob;
 
@@ -32,11 +32,11 @@ async function createGroupsCollection(){
             return console.log(error.message)
         }
     
-        const groups = await createGroups(page)
+        const users = await createUsers(browser, page)
         var date = new Date().toLocaleString()
 
         const group = new GroupsCollection({
-            groups: groups,
+            users: users,
             date: date
          })
          const result = await group.save()
