@@ -1,31 +1,33 @@
 const scrollToBottom = require('../middlewares/auto-scroll');
 const createUser = require('./post-scraper')
 const getAbout = require('./about-scraper')
+const fs = require('fs')
 
-const target = [
-    "https://m.facebook.com/profile.php?id=100022599533892",    
-]
+
+
+const target = fs.readFileSync('./target.txt', 'utf-8').split('\n')
 
 
 
 module.exports = async function createUsers(browser, page){
-
-        const users = []
-
-        for (let i = 0; i < target.length; i++) {
-
-            const postIds = []
-            // NAVIGATION AND SCROLING TO THE DESIRED PAGE //
-            try { 
-                    await page.goto(target[i]);
-                    await page.waitFor(1000)
-                    console.log("navigation succesfull");
-
-                } catch(error){
-                    console.log(error.message);
-                }
-
-            const info = await getAbout(page)
+    
+    const users = []
+    
+    for (let i = 0; i < target.length; i++) {
+        
+        const postIds = []
+        // NAVIGATION AND SCROLING TO THE DESIRED PAGE //
+        try { 
+            await page.goto(target[i]);
+            await page.waitFor(1000)
+            console.log("navigation succesfull");
+            
+        } catch(error){
+            console.log(error.message);
+        }
+        
+        const info = await getAbout(page)
+           
 
             try{
                     await scrollToBottom(page)
@@ -111,9 +113,8 @@ module.exports = async function createUsers(browser, page){
         
                 
                 
+
             const arr = postIds.filter(postId => postId !== "empty")
-            
-            
             const posts = await createUser(page, arr)
             
         

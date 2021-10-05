@@ -8,7 +8,7 @@ async function scrollToBottom(page) {
         // Called for the first time
         startTime= Date.now()
       } else if (Date.now() - startTime > 300000) {
-        // Stop condition, Have duration passed
+        // Stop condition, Have duration passed 
         startTime = null;
         return;
       }

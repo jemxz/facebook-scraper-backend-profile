@@ -4,24 +4,28 @@ module.exports = async function getAbout(page){
 
     let about = []
     let aboutSubjectTags = []
-    let aboutSubjects = []
-    let name = []
-    let discription = []
+    let aboutSubjects = [] 
+    let name = [] // The Name of the tags that eg: WORK, EDUCATION, PLACES LIVED etc ....
+    let discription = [] // This is the discription of the tags eg: WORK discription can Engineering
 
         try {
                let options = {button : "middle"};
-               await page.click("._5xu4")
-               await page.waitFor(1000) 
-               await scrollToBottom(page)
-               console.log("scrolling success");
-               
+               await page.click("._5xu4")     
             } catch (error) {
                 console.log(error.message);
+        }
+        try {
+                await page.waitFor(1000) 
+                await scrollToBottom(page)
+                console.log("scrolling successfully done");
+            
+        } catch (error) {
+            console.log(error.message);
         }
        
     ////////////////////// SCRAPES FOR THE TAGS OF A SUBJECT ///////////////////////
             try {
-                    let selector = "._5cdv";
+                    let selector = ".__gx";
                     let totalNames = await page.evaluate((sel) => {
                     let elements = Array.from(document.querySelectorAll(sel));
                     return elements.length;
@@ -38,14 +42,15 @@ module.exports = async function getAbout(page){
                             }
                         }, i, selector);
                     
-                        name.push(basicInfo)  
+                        name.push(basicInfo)
+                       // console.log("basicInfo: " + basicInfo );  
                     }
             } catch (error) {
                 return console.log(error.message)
             }
     ////////////////////// SCRAPES FOR THE DISCRIPTION OF TAGS OF A SUBJECT ///////////////
             try {
-                let selector = "._52jd._52ja";
+                let selector = "._55x2._5ji7";
                 let totalDiscripition = await page.evaluate((sel) => {
                     let elements = Array.from(document.querySelectorAll(sel));
                     return elements.length;
@@ -63,7 +68,8 @@ module.exports = async function getAbout(page){
                             return 'empty';
                         }
                     },i, selector);
-                    discription.push(info)  
+                    discription.push(info)
+                   // console.log("discription: " + info);  
                 }
                 } catch (error) {
                     return console.log(error.message)
@@ -87,7 +93,8 @@ module.exports = async function getAbout(page){
                             return 'empty';
                         }
                     },i, selector);
-                    aboutSubjectTags.push(tags)  
+                    aboutSubjectTags.push(tags)
+                   // console.log("aboutSubjectTags: " + tags);  
                 }
                 } catch (error) {
                     return console.log(error.message)
@@ -123,10 +130,13 @@ module.exports = async function getAbout(page){
                 }
     /////////////////////////// Create about profile /////////////////////////////
                 for (let i = 0; i < name.length; i++) {
-                    about.push({[discription[i]] : name[i]})
+                    about.push({[name[i]] : discription[i]})
                     
                 }
+            // console.log(about);
             return about
 }
+
+
 
 

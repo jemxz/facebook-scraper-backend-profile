@@ -7,8 +7,8 @@ const usersCollection = new Schema({
                 name: String,
                 numberOfFriends: String,
                 about: String,
-                info: Array,
                 facebookLink: String,
+                info: Array,
                 posts: [
                     {
                         postId: String,
