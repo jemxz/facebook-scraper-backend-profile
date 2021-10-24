@@ -1,5 +1,25 @@
 const mongoose = require('mongoose');
-const GroupsCollection = require('./model/groupsCollection-model')
+const bodyParser = require('body-parser')
+const express = require('express')
+const cors = require('cors')
+const userscollection = require('./routes/groupsCollection')
+const full = require('./routes/full')
+const singleGroup = require('./routes/singleGroup')
+const singlePost = require('./routes/singlePost')
+const singleComment = require('./routes/singleComment')
+const allPosts = require('./routes/allPosts')
+const allComments = require('./routes/allComments')
+const app = express();
+
+app.use(
+    cors({
+        origin: "http://localhost:3000",
+        credentials: true
+    })
+)
+
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({extended: true}))
 
 
 mongoose.connect('mongodb://localhost/facebook-data', {useNewUrlParser:true, useUnifiedTopology: true})
@@ -7,21 +27,16 @@ mongoose.connect('mongodb://localhost/facebook-data', {useNewUrlParser:true, use
     .catch(err => console.log(err.message))
 
 
-// const group = require('./routers/group')
-const express = require('express')
-const app = express();
-const router = express.Router()
 
 
-app.get('/api/group/:id',async function (req, res) {
-    const id = req.params.id
-    const groupsCollection = await GroupsCollection.findOne({"groups.name":id}, {"groups.name.$":true})
-    if(!groupsCollection) res.status(404).send('It doesnt exist')
-    res.send(groupsCollection);
-    
-});
+app.use('/api/users', userscollection)
+app.use('/api/users', full)
+app.use('/api/users/user', singleGroup)
+app.use('/api/users/post', singlePost)
+app.use('/api/users/comment', singleComment)
+app.use('/api/users/posts', allPosts)
+app.use('/api/users/comments', allComments)
 
 
-
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3333;
 app.listen(port, () => console.log(`Listening on port ${port}...`));
