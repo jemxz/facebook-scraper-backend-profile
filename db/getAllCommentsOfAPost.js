@@ -2,8 +2,7 @@ const UsersCollection = require('../model/usersCollection-model')
 
 async function getCollectionById(id) {
     const collection = await UsersCollection.findById(id)
-    return collection.groups
-        
+    return collection.users
 }
 
 async function getAllComment(id,id2,id3) {

@@ -23,7 +23,7 @@ app.use(bodyParser.urlencoded({extended: true}))
 
 
 mongoose.connect('mongodb://localhost/facebook-data', {useNewUrlParser:true, useUnifiedTopology: true})
-    .then(() => console.log('Connected to MongoDB...'))
+    .then(() => console.log('Connected to MongoDB ...'))
     .catch(err => console.log(err.message))
 
 
@@ -39,4 +39,4 @@ app.use('/api/users/comments', allComments)
 
 
 const port = process.env.PORT || 3333;
-app.listen(port, () => console.log(`Listening on port ${port}...`));
+app.listen(port, () => console.log(`Listening on port ${port} ...`));
