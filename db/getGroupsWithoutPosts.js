@@ -14,8 +14,9 @@ const UsersCollection = require('../model/usersCollection-model')
         await Promise.all(result.map(async e => {
             const obj = {
                 _id: e._id,
+                info:e.info,
                 name: e.name,
-                numberOfFollowers: e.numberOfFollowers,
+                numberOfFriends: e.numberOfFFriends,
                 about: e.about,
                 facebookLink: e.facebookLink
             }
