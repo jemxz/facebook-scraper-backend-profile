@@ -11,6 +11,7 @@ const singlePost = require('./routes/singlePost')
 const singleComment = require('./routes/singleComment')
 const allPosts = require('./routes/allPosts')
 const allComments = require('./routes/allComments')
+const searchItem = require('./routes/searchContent');
 const app = express();
 
 app.use(
@@ -31,8 +32,9 @@ mongoose.connect('mongodb://localhost/facebook-data', {useNewUrlParser:true, use
 
 
 
-app.use('/api/users/search', userscollection)
+app.use('/api/user/search', userscollection)
 app.use('/api/users/onlygroups', groupsonly)
+app.use('/api/users/search', searchItem)
 app.use('/api/users', full)
 app.use('/api/users/dates', date)
 app.use('/api/users/user', singleGroup)
