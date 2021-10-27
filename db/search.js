@@ -15,6 +15,8 @@ const UsersCollection = require("../model/usersCollection-model");
                 if(str1.includes(str2)){
                     var temp = {
                         group_id: e._id,
+                        userName: e.name,
+                        userLink: e.facebookLink,
                         _id: e1._id,
                         postLink: e1.postId,
                         postContent: e1.postContent,
