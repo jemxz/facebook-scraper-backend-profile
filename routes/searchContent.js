@@ -4,9 +4,10 @@ const router = express.Router();
 
 
 
-router.get('/:q', async function (req, res) {
-    const id = req.query.q
-    const result = await serachItem(id)
+router.get('/:id/:q', async function (req, res) {
+    const id1 = req.params.id
+    const id2 = req.query.q
+    const result = await serachItem(id1,id2)
     if(!result) res.status(404).send('It doesnt exist')
     res.send(result);
     
