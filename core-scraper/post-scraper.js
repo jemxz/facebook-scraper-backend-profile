@@ -25,7 +25,7 @@ module.exports = async function createPosts(page, postIds){
         // Navigation to the right page    
             try {
                 await page.goto(postLinks[i]);
-                await page.waitFor(1000)
+                await page.waitFor(5000)
                 // console.log("navigation succesfull");
             
             } catch (error) {
@@ -197,16 +197,28 @@ module.exports = async function createPosts(page, postIds){
                 comments.push({
                     commentContent: commentContents[j],
                     commenterName: names[j],
-                    commentorId: ids[j]
+                    commentorId: ids[j],
+                    reporting: {
+                        is_reported: false,
+                        reporting_date: date,
+                        reported_by: ""
+                    },
                 })
             }
+
         //  console.log(comments);
+        var date = new Date().toLocaleString()
             posts.push ({
                     postId: postLinks[i],
                     postContent: postContent,
                     numberOfLikes: like,
                     numberOfShares: share,
                     timeOfPost: timeStamp,
+                    reporting: {
+                        is_reported: false,
+                        reporting_date: date,
+                        reported_by: ""
+                    },
                     comments: comments
                 })    
         // console.log(posts);
