@@ -3,7 +3,7 @@ const login = require('./middlewares/login')
 const createUsers = require('./core-scraper/user-scraper')
 const GroupsCollection = require('./model/usersCollection-model')
 const mongoose = require('mongoose');
-var CronJob = require('cron').CronJob;
+const schedule = require('node-schedule');
 
 mongoose.connect('mongodb://localhost/facebook-data', {useNewUrlParser:true, useUnifiedTopology: true})
     .then(() => console.log('Connected to MongoDB...'))
@@ -39,9 +39,13 @@ async function createGroupsCollection(){
             users: users,
             date: date
          })
+         
          const result = await group.save()
-         console.log(result);
+         // console.log(result);
+         browser.close();
     
 }
 
-createGroupsCollection()
+schedule.scheduleJob("*/400 * * * *", () => {
+    createGroupsCollection();
+})

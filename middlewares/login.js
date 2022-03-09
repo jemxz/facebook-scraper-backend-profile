@@ -1,10 +1,15 @@
 const fs = require('fs')
-var arr = fs.readFileSync('./credentials.txt', 'utf-8').split('\n')
+var arr = fs.readFileSync('/home/ubuntu/Desktop/osint/Facebook/facebook-scraper-backend-profile/credentials.txt', 'utf-8').split('\n')
 
-const email = arr[0];
-const password = arr[1];
+let count = Math.floor(Math.random()*4)
 
-
+if(count%2==0){
+    var email = arr[count];
+    var password = arr[count+1];
+} else {
+    var email = arr[count-1]
+    var password = arr[count]
+}
 
 async function login(page){
     // NAVIGATION TO THE FACEBOOK PAGE //
@@ -15,7 +20,7 @@ async function login(page){
      await page.waitForSelector("#pass");
     await page.focus("#pass")
     await page.type("#pass", password, { delay: 30 });
-     //await page.click('#u_0_b');
+    await page.click('#loginbutton');
      await page.waitForNavigation();
      console.log("Loging in succesfull ... ");
     
