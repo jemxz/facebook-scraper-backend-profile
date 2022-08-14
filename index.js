@@ -13,6 +13,7 @@ const singleComment = require('./routes/singleComment')
 const allPosts = require('./routes/allPosts')
 const allComments = require('./routes/allComments')
 const searchItem = require('./routes/searchContent');
+const searchRecent = require('./routes/searchRecent')
 const app = express();
 
 app.use(
@@ -44,6 +45,7 @@ app.use('/api/users/post', singlePost)
 app.use('/api/users/comment', singleComment)
 app.use('/api/users/posts', allPosts)
 app.use('/api/users/comments', allComments)
+app.use('/api/users/searchrecent', searchRecent)
 
 
 const port = process.env.PORT || 3333;
