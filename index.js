@@ -14,6 +14,7 @@ const allPosts = require('./routes/allPosts')
 const allComments = require('./routes/allComments')
 const searchItem = require('./routes/searchContent');
 const searchRecent = require('./routes/searchRecent')
+const getSentiment = require('./routes/postsWithoutComment')
 const app = express();
 
 app.use(
@@ -32,6 +33,7 @@ mongoose.connect('mongodb://localhost/facebook-data', {useNewUrlParser:true, use
 
 
 app.use('/api/user/search', userscollection)
+app.use('/api/user/postswithoutcomment', getSentiment)
 app.use('/api/users/onlygroups', groupsonly)
 app.use('/api/users/datesandgroups', datesandgroups)
 app.use('/api/users/search', searchItem)
