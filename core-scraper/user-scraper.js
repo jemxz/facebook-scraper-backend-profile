@@ -5,7 +5,7 @@ const fs = require('fs')
 
 
 
-const target = fs.readFileSync('/home/ubuntu/Desktop/osint/Facebook/facebook-scraper-backend-profile/target.txt', 'utf-8').split('\n')
+const target = fs.readFileSync('/home/osint/Desktop/osint/Facebook/facebook-scraper-backend-profile/target.txt', 'utf-8').split('\n')
 
 
 
