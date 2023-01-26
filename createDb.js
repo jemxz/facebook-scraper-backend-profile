@@ -55,6 +55,6 @@ async function createGroupsCollection() {
 }
 createGroupsCollection();
 
-// schedule.scheduleJob("*/5 * * * *", () => {
-//   createGroupsCollection();
-// });
+schedule.scheduleJob("0 */6 * * *", () => {
+  createGroupsCollection();
+});

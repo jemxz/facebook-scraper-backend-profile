@@ -1,8 +1,12 @@
 const Credentials = require("../model/credentials-model");
 
 async function getCredentials() {
-  const collection = await Credentials.find();
-  return collection.groups;
+  try {
+    const collection = await Credentials.find();
+    return collection.groups;
+  } catch (error) {
+    return {};
+  }
 }
 
 module.exports = getCredentials;

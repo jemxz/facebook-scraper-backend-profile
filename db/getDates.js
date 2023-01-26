@@ -1,10 +1,12 @@
-const UserCollection = require('../model/usersCollection-model')
-
+const UserCollection = require("../model/usersCollection-model");
 
 async function getDate() {
-    const collection = await UserCollection.find({}).select('date')
-    return collection        
+  try {
+    const collection = await UserCollection.find({}).select("date");
+    return collection;
+  } catch (error) {
+    return {};
+  }
 }
 
-
-module.exports = getDate
+module.exports = getDate;

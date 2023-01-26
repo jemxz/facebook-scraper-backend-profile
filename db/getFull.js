@@ -1,9 +1,12 @@
-const UsersCollection = require('../model/usersCollection-model')
+const UsersCollection = require("../model/usersCollection-model");
 
 async function getFull() {
-    const collection = await UsersCollection.find()
-    return collection
-        
+  try {
+    const collection = await UsersCollection.find();
+    return collection;
+  } catch (error) {
+    return {};
+  }
 }
 
-module.exports = getFull
+module.exports = getFull;
