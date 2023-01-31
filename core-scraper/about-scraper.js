@@ -1,4 +1,5 @@
 
+const logToFile = require('log-to-file');
 const scrollToBottom = require('../middlewares/auto-scroll');
 module.exports = async function getAbout(page){
 
@@ -12,6 +13,7 @@ module.exports = async function getAbout(page){
                let options = {button : "middle"};
                await page.click("._5xu4")     
             } catch (error) {
+                logToFile(error.message, '../../../../logs/FacebookusersError.log')
                 console.log(error.message);
         }
         try {
@@ -20,6 +22,7 @@ module.exports = async function getAbout(page){
                 console.log("scrolling successfully done");
             
         } catch (error) {
+            logToFile(error.message, '../../../../logs/FacebookusersError.log')
             console.log(error.message);
         }
        
@@ -46,6 +49,7 @@ module.exports = async function getAbout(page){
                        // console.log("basicInfo: " + basicInfo );  
                     }
             } catch (error) {
+                logToFile(error.message, '../../../../logs/FacebookusersError.log')
                 return console.log(error.message)
             }
     ////////////////////// SCRAPES FOR THE DISCRIPTION OF TAGS OF A SUBJECT ///////////////
@@ -72,6 +76,7 @@ module.exports = async function getAbout(page){
                    // console.log("discription: " + info);  
                 }
                 } catch (error) {
+                    logToFile(error.message, '../../../../logs/FacebookusersError.log')
                     return console.log(error.message)
                 }
     ///////////////////////////////// SCRAPES FOR SUBJECT CONNECTIONS AND HOBBIES TAGS //////////
@@ -97,6 +102,7 @@ module.exports = async function getAbout(page){
                    // console.log("aboutSubjectTags: " + tags);  
                 }
                 } catch (error) {
+                    logToFile(error.message, '../../../../logs/FacebookusersError.log')
                     return console.log(error.message)
                 }
     ///////////////////////////////// SCRAPES FOR SUBJECT CONNECTIONS AND HOBBIES TAGS //////////
@@ -121,11 +127,13 @@ module.exports = async function getAbout(page){
                     aboutSubjects.push(info)  
                 }
                 } catch (error) {
+                    logToFile(error.message, '../../../../logs/FacebookusersError.log')
                     return console.log(error.message)
                 }
                 try {
                     await page.goBack()
                 } catch (error) {
+                    logToFile(error.message, '../../../../logs/FacebookusersError.log')
                     return console.log(error.message);
                 }
     /////////////////////////// Create about profile /////////////////////////////

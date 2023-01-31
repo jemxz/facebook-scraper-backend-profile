@@ -2,8 +2,9 @@ const scrollToBottom = require("../middlewares/auto-scroll");
 const createUser = require("./post-scraper");
 const getAbout = require("./about-scraper");
 const fs = require("fs");
+const logToFile = require("log-to-file");
 
-const target = fs.readFileSync("./target.txt", "utf-8").split("\n");
+const target = fs.readFileSync("/home/osint/Desktop/osint/Facebook/facebook-scraper-backend-profile/target.txt", "utf-8").split("\n");
 
 module.exports = async function createUsers(browser, page) {
   const users = [];
@@ -16,6 +17,7 @@ module.exports = async function createUsers(browser, page) {
       await page.waitFor(1000);
       console.log("navigation succesfull");
     } catch (error) {
+      logToFile(error.message, '../../../../logs/FacebookusersError.log')
       console.log(error.message);
     }
 
@@ -25,6 +27,7 @@ module.exports = async function createUsers(browser, page) {
       await scrollToBottom(page);
       console.log("scrolling success");
     } catch (error) {
+      logToFile(error.message, '../../../../logs/FacebookusersError.log')
       return console.log(error.message);
     }
 
@@ -53,6 +56,7 @@ module.exports = async function createUsers(browser, page) {
         postIds.push(href);
       }
     } catch (error) {
+      logToFile(error.message, '../../../../logs/FacebookusersError.log')
       return console.log(error.message);
     }
 
@@ -70,6 +74,7 @@ module.exports = async function createUsers(browser, page) {
         }
       }, selector);
     } catch (error) {
+      logToFile(error.message, '../../../../logs/FacebookusersError.log')
       return console.log(error.message);
     }
 
@@ -87,6 +92,7 @@ module.exports = async function createUsers(browser, page) {
         }
       }, selector);
     } catch (error) {
+      logToFile(error.message, '../../../../logs/FacebookusersError.log')
       return console.log(error.message);
     }
 
@@ -104,6 +110,7 @@ module.exports = async function createUsers(browser, page) {
         }
       }, selector);
     } catch (error) {
+      logToFile(error.message, '../../../../logs/FacebookusersError.log')
       return console.log(error.message);
     }
 

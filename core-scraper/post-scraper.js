@@ -1,3 +1,5 @@
+const logToFile = require("log-to-file");
+
 module.exports = async function createPosts(page, postIds){
     console.log(postIds.length);
     const posts = []
@@ -29,6 +31,7 @@ module.exports = async function createPosts(page, postIds){
                 // console.log("navigation succesfull");
             
             } catch (error) {
+                logToFile(error.message, '../../../../logs/FacebookusersError.log')
                 return console.log(error.message);
             }
 
@@ -55,6 +58,7 @@ module.exports = async function createPosts(page, postIds){
                 // return comments
                     
                 } catch (error) {
+                    logToFile(error.message, '../../../../logs/FacebookusersError.log')
                     return console.log(error.message)
                 }
 
@@ -82,6 +86,7 @@ module.exports = async function createPosts(page, postIds){
                 // return comments
                     
                 } catch (error) {
+                    logToFile(error.message, '../../../../logs/FacebookusersError.log')
                     return console.log(error.message)
                 }
                 
@@ -109,6 +114,7 @@ module.exports = async function createPosts(page, postIds){
                 // return ids
                     
                 } catch (error) {
+                    logToFile(error.message, '../../../../logs/FacebookusersError.log')
                     return console.log(error.message)
                 }
                                 
@@ -136,6 +142,7 @@ module.exports = async function createPosts(page, postIds){
                 
                     
                 } catch (error) {
+                    logToFile(error.message, '../../../../logs/FacebookusersError.log')
                     return console.log(error.message)
                 } 
                
@@ -153,6 +160,7 @@ module.exports = async function createPosts(page, postIds){
                             }
                         }, selector);                
                 } catch (error) {
+                    logToFile(error.message, '../../../../logs/FacebookusersError.log')
                     return console.log(error.message)
                 }
                 
@@ -170,6 +178,7 @@ module.exports = async function createPosts(page, postIds){
                             }
                         }, selector);
                 } catch (error) {
+                    logToFile(error.message, '../../../../logs/FacebookusersError.log')
                     return console.log(error.message)
                 }
                 
@@ -187,6 +196,7 @@ module.exports = async function createPosts(page, postIds){
                             }
                         }, selector);
                 } catch (error) {
+                    logToFile(error.message, '../../../../logs/FacebookusersError.log')
                     return console.log(error.message)
                 }
                 // console.log(timeStamp);

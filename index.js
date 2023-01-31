@@ -7,6 +7,7 @@ const groupsonly = require("./routes/onlyGroups");
 const datesandgroups = require("./routes/onlyDatesAndGroups");
 const full = require("./routes/full");
 const date = require("./routes/date");
+const credentials = require("./routes/credentials")
 const singleGroup = require("./routes/singleGroup");
 const singlePost = require("./routes/singlePost");
 const singleComment = require("./routes/singleComment");

@@ -20,6 +20,7 @@
     "cors": "^2.8.5",
     "cron": "^1.8.2",
     "express": "^4.17.1",
+    "log-to-file": "^3.0.3",
     "mongoose": "^5.9.2",
     "node-schedule": "^2.1.0",
     "pug": "^3.0.0",

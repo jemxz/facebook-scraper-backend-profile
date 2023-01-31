@@ -1,4 +1,5 @@
 const puppeteer = require("puppeteer");
+const log = require('log-to-file')
 const login = require("./middlewares/login");
 const createUsers = require("./core-scraper/user-scraper");
 const GroupsCollection = require("./model/usersCollection-model");
@@ -20,9 +21,9 @@ async function createGroupsCollection() {
   var date = new Date().toLocaleString();
 
   const browser = await puppeteer.launch({
-    headless: false,
+    headless: true,
     defaultViewport: null,
-    args: ["--disable-notifications"],
+    args: ["--disable-notifications", "--disable-dev-shm-usage", "--no-sandbox"],
   });
 
   const page = await browser.newPage();
@@ -41,20 +42,27 @@ async function createGroupsCollection() {
     return console.log(error.message);
   }
 
-  const users = await createUsers(browser, page);
-  var date = new Date().toLocaleString();
+  try {
+    
+    const users = await createUsers(browser, page);
+    var date = new Date().toLocaleString();
+  
+    const group = new GroupsCollection({
+      users: users,
+      date: date,
+    });
+  
+    const result = await group.save();
+    // console.log(result);
+    browser.close();
+    console.log("Completed One Iteration");
+  } catch (error) {
+    
+  }
 
-  const group = new GroupsCollection({
-    users: users,
-    date: date,
-  });
-
-  const result = await group.save();
-  // console.log(result);
-  browser.close();
 }
-createGroupsCollection();
 
-schedule.scheduleJob("0 */6 * * *", () => {
+
+schedule.scheduleJob("0 */8 * * *", () => {
   createGroupsCollection();
-});
+ });
