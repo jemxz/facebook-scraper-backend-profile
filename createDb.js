@@ -1,5 +1,5 @@
 const puppeteer = require("puppeteer");
-const log = require('log-to-file')
+const log = require("log-to-file");
 const login = require("./middlewares/login");
 const createUsers = require("./core-scraper/user-scraper");
 const GroupsCollection = require("./model/usersCollection-model");
@@ -23,7 +23,11 @@ async function createGroupsCollection() {
   const browser = await puppeteer.launch({
     headless: true,
     defaultViewport: null,
-    args: ["--disable-notifications", "--disable-dev-shm-usage", "--no-sandbox"],
+    args: [
+      "--disable-notifications",
+      "--disable-dev-shm-usage",
+      "--no-sandbox",
+    ],
   });
 
   const page = await browser.newPage();
@@ -43,26 +47,24 @@ async function createGroupsCollection() {
   }
 
   try {
-    
     const users = await createUsers(browser, page);
     var date = new Date().toLocaleString();
-  
+
     const group = new GroupsCollection({
       users: users,
       date: date,
     });
-  
-    const result = await group.save();
-    // console.log(result);
+
+    if (users[0].posts[0].timeOfPost != "") {
+      const result = await group.save();
+      console.log("Completed One Iteration");
+    } else {
+      log("Failed to scrape because of facebook blockage", "error.log");
+    }
     browser.close();
-    console.log("Completed One Iteration");
-  } catch (error) {
-    
-  }
-
+  } catch (error) {}
 }
-
 
 schedule.scheduleJob("0 */8 * * *", () => {
   createGroupsCollection();
- });
+});
